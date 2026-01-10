@@ -20,12 +20,14 @@
 3.  **CUDA (可选)**: 如果需要 GPU 加速转录，请安装相应的 NVIDIA 驱动和 CUDA 环境。
 
 ### 安装依赖包
-推荐使用 `uv` 或 `pip` 安装依赖：
+本项目推荐使用 [uv](https://github.com/astral-sh/uv) 管理依赖，以获得极速的安装体验：
 
 ```bash
-pip install -r requirements.txt
-# 或者如果你有 pyproject.toml
-pip install .
+# 安装 uv (如果尚未安装)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# 同步项目依赖并创建虚拟环境
+uv sync
 ```
 
 ## 3. 配置文件
