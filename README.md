@@ -51,39 +51,50 @@ WHISPER_MODEL=base  # 可选: tiny, base, small, medium, large-v3
 
 项目通过 `main.py` 进行命令行交互。
 
-### 第一步：初始化项目
+### 初始化项目
 创建一个新项目并指定所属行业（用于生成行业术语表）：
 ```bash
-python main.py init "强化学习课程" --industry "强化学习,人工智能"
+# -i 是 --industry 的缩写
+python main.py init "强化学习课程" -i "强化学习,人工智能"
 ```
 
-### 第二步：添加视频
+### 添加视频
 向项目中添加单个视频或整个播放列表链接：
 ```bash
 python main.py add "强化学习课程" "https://www.youtube.com/watch?v=..."
 ```
 
-### 第三步：开始执行
+### 开始执行
 运行全自动处理流程（下载 -> 转录 -> 翻译 -> 压制）：
 ```bash
-python main.py run "强化学习课程"
+# 如需查看详细 AI 调用日志，可添加 --debug 参数
+python main.py --debug run "强化学习课程"
 ```
 
-### 其他命令
+### 其他管理命令
 - **查看项目列表**：`python main.py list`
-- **更新术语表**：`python main.py update-glossary "项目名" --industry "新行业"`
+- **更新术语表**：`python main.py glossary "项目名" -i "新行业"`
 
 ## 5. 字幕压制模式 (`burn_mode`)
 在项目的 `project_config.json` 中可以修改 `burn_mode`：
-- `none`: 不执行压制。
-- `original`: 仅压制原语字幕（位于底部）。
-- `translated`: 仅压制翻译字幕（位于顶部）。
-- `double`: 同时压制双语字幕。
+- `none`: 不执行压制，仅生成字幕文件。
+- `original`: 仅压制原语字幕（位于视频底部，白色）。
+- `translated`: 仅压制翻译字幕（位于视频顶部，黄色）。
+- `double`: (默认) 同时压制双语字幕。
 
 ## 6. 项目结构
-- `/src`: 核心源代码。
-- `/output`: (默认) 存储项目配置、视频素材、字幕文件及最终成品。
-- `main.py`: 命令行入口。
+```text
+.
+├── src/                # 核心逻辑 (AI, 视频, YouTube 处理)
+├── output/             # 默认数据存储目录
+│   └── [项目名]/
+│       ├── project_config.json   # 项目配置与进度
+│       ├── glossary.json         # 行业术语表
+│       └── videos/               # 视频素材与成品
+├── main.py             # 命令行入口
+├── cli.py              # 命令行界面定义
+└── .env                # 敏感配置 (API Keys)
+```
 
 ## 版权说明
 本项目采用 [MIT License](LICENSE) 开源协议。
