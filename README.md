@@ -1,4 +1,4 @@
-# 🎬 YouTubeDownload
+# 🎬 yt-translate
 
 > YouTube 视频自动下载 · 转录 · 翻译 · 字幕压制 一条龙工具
 
